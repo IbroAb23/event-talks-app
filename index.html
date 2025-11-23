@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCon 2025 | Event Schedule</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --surface-color: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --hover-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        #search-wrapper {
+            margin-bottom: 30px;
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        #schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .schedule-item {
+            display: flex;
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .schedule-item.talk-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .time-slot {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            flex-shrink: 0;
+        }
+        
+        .break .time-slot {
+             background-color: var(--secondary-color);
+        }
+
+        .details {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .details h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .speakers {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .categories {
+            margin-bottom: 15px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            font-weight: 500;
+        }
+
+        .description {
+            font-size: 1rem;
+        }
+        
+        .break .details h2 {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .schedule-item {
+                flex-direction: column;
+            }
+            .time-slot {
+                writing-mode: horizontal-tb;
+                transform: rotate(0);
+                padding: 10px;
+                border-bottom: 1px solid var(--border-color);
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>TechCon 2025</h1>
+            <p>A Full Day of Inspiring Tech Talks</p>
+        </header>
+
+        <div id="search-wrapper">
+            <input type="search" id="search-bar" placeholder="Filter by category (e.g., AI, Web, Cloud)...">
+        </div>
+
+        <main id="schedule-container">
+            <!-- Schedule will be dynamically generated here -->
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scheduleData = [
+                {
+                    type: 'talk',
+                    time: '10:00 AM',
+                    title: 'The Future of AI: Beyond Large Language Models',
+                    speakers: ['Dr. Evelyn Reed'],
+                    categories: ['AI', 'Machine Learning', 'Future Tech'],
+                    description: 'A deep dive into the next generation of artificial intelligence, exploring novel architectures and their potential impact on society and technology.'
+                },
+                { type: 'break', time: '11:00 AM', title: 'Coffee Break' },
+                {
+                    type: 'talk',
+                    time: '11:10 AM',
+                    title: 'Modern Web Architectures: The Composable Enterprise',
+                    speakers: ['David Chen', 'Maria Garcia'],
+                    categories: ['Web', 'Architecture', 'JavaScript'],
+                    description: 'Learn how to build scalable, flexible, and maintainable web applications using a composable architecture with micro-frontends and headless CMS.'
+                },
+                { type: 'break', time: '12:10 PM', title: 'Transition' },
+                {
+                    type: 'talk',
+                    time: '12:20 PM',
+                    title: 'Quantum Computing: From Theory to Practice',
+                    speakers: ['Ben Carter'],
+                    categories: ['Quantum', 'Hardware'],
+                    description: 'This talk demystifies quantum computing, explaining the fundamental principles and showcasing the latest advancements in building practical quantum machines.'
+                },
+                { type: 'break', time: '13:20 PM', title: 'Lunch Break', duration: '60 min' },
+                {
+                    type: 'talk',
+                    time: '14:20 PM',
+                    title: 'Sustainable Cloud: Optimizing for Cost and Carbon',
+                    speakers: ['Fatima Ahmed'],
+                    categories: ['Cloud', 'Sustainability', 'DevOps'],
+                    description: 'Discover strategies and tools for building environmentally friendly and cost-effective cloud infrastructure withoutsacrificing performance.'
+                },
+                { type: 'break', time: '15:20 PM', title: 'Transition' },
+                {
+                    type: 'talk',
+                    time: '15:30 PM',
+                    title: 'The Art of Data Storytelling',
+                    speakers: ['Leo Rivera', 'Chloe Kim'],
+                    categories: ['Data', 'Visualization', 'UX'],
+                    description: 'Transform complex data into compelling narratives. This session covers principles of data visualization and storytelling to make your insights impactful.'
+                },
+                { type: 'break', time: '16:30 PM', title: 'Transition' },
+                {
+                    type: 'talk',
+                    time: '16:40 PM',
+                    title: 'Securing the Supply Chain: A Developer\'s Responsibility',
+                    speakers: ['Kenji Tanaka'],
+                    categories: ['Security', 'DevOps'],
+                    description: 'In an era of complex dependencies, software supply chain security is paramount. Learn practical steps developers can take to secure their applications.'
+                }
+            ];
+
+            const scheduleContainer = document.getElementById('schedule-container');
+            const searchBar = document.getElementById('search-bar');
+
+            function renderSchedule(filter = '') {
+                scheduleContainer.innerHTML = '';
+                const filterText = filter.toLowerCase().trim();
+
+                for (const item of scheduleData) {
+                    const isTalk = item.type === 'talk';
+                    
+                    if (isTalk) {
+                        const categoriesText = item.categories.join(' ').toLowerCase();
+                        if (filterText && !categoriesText.includes(filterText)) {
+                            continue; // Skip this talk if it doesn't match the filter
+                        }
+                    }
+
+                    const itemElement = document.createElement('div');
+                    itemElement.className = `schedule-item ${isTalk ? 'talk-item' : 'break'}`;
+                    
+                    // Store categories in a data attribute for filtering
+                    if(isTalk) {
+                        itemElement.dataset.categories = item.categories.join(' ').toLowerCase();
+                    }
+
+                    let itemHTML = `
+                        <div class="time-slot">${item.time}</div>
+                        <div class="details">
+                            <h2>${item.title}</h2>
+                    `;
+
+                    if (isTalk) {
+                        itemHTML += `
+                            <div class="speakers">${item.speakers.join(' & ')}</div>
+                            <div class="categories">
+                                ${item.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                            </div>
+                            <p class="description">${item.description}</p>
+                        `;
+                    }
+                    
+                    itemHTML += '</div>';
+                    itemElement.innerHTML = itemHTML;
+                    scheduleContainer.appendChild(itemElement);
+                }
+            }
+            
+            function filterTalks() {
+                const searchTerm = searchBar.value.toLowerCase().trim();
+                const talkItems = document.querySelectorAll('.talk-item');
+                
+                // In this simple single-page app, re-rendering is fast and simple.
+                // For more complex apps, you might toggle visibility instead.
+                renderSchedule(searchTerm);
+            }
+
+            searchBar.addEventListener('input', filterTalks);
+
+            // Initial render of the full schedule
+            renderSchedule();
+        });
+    </script>
+</body>
+</html>
